@@ -201,10 +201,22 @@ with tab1:
 
     # Insight Box
     st.info("""
-    💡 **Key Finding:** Variant A (Dynamic Pricing) shows a **+15.98% uplift in AOV**
-    ($1,282 vs $1,238) across 1,200 orders and $1.51M GMV. Uplift is strongest in
-    Electronics and UAE market. Recommendation: **Targeted rollout in Electronics + UAE**
-    before full deployment. Statistical significance confirmed (p < 0.05).
+    💡 **Key Finding:** Variant A (Dynamic Pricing) shows **+3.6% AOV uplift**
+    ($1,282 vs $1,238) across 1,200 orders and $1.51M GMV.
+
+    **Top Performing Segments:**
+    - 🏆 Electronics: **+36.86% uplift** — strongest category
+    - 🥈 Home Decor: **+18.41% uplift** — second best
+    - 🌍 Brazil: **+26.12% uplift** — strongest country
+    - 🌍 Pakistan: **+19.43% uplift** — second best country
+
+    **Avoid Rollout In:**
+    - ❌ Sports: **-16.03%** — worst category
+    - ❌ Australia: **-30.14%** — worst country
+
+    **Recommendation:** Targeted pilot in **Electronics + Brazil**
+    for 60 additional days before global deployment. p=0.47 indicates
+    extended testing required for statistical significance.
     """)
 
     # ── TAB 2: STATISTICAL TEST ─────────────────────
@@ -376,11 +388,13 @@ with tab3:
 
     st.divider()
     st.info("""
-    💡 **Segment Insight:** Not all categories respond equally to dynamic pricing.
-    Focus rollout on categories and countries where Variant A shows consistent
-    positive uplift. Avoid markets with negative or flat response.
+    💡 **Segment Insight:**
+    - **Best Category:** Electronics +36.86% · Home Decor +18.41%
+    - **Best Country:** Brazil +26.12% · Pakistan +19.43%
+    - **Avoid:** Sports -16.03% · Australia -30.14%
+    - **Q4 strongest quarter** — Variant A AOV $1,326 vs Control $1,252
+    - **Action:** Rollout to Electronics + Brazil first, monitor for 60 days
     """)
-
 
 # ── TAB 4: ML PREDICTOR ─────────────────────────
 with tab4:
