@@ -25,28 +25,29 @@ This project builds a complete data analytics pipeline — from raw data cleanin
 > **Finding:** Variant A shows consistent AOV uplift but requires extended testing for statistical significance. Targeted rollout in Electronics + UAE recommended.
 
 ---
-
 ## 🏗️ Project Structure
-├── app/
-│   └── streamlit_app.py        # Live Streamlit dashboard
-├── data/
-│   ├── raw/                    # Original dataset
-│   └── processed/              # Cleaned + feature engineered
-├── notebooks/
-│   ├── phase1.py               # Data loading
-│   ├── phase2.py               # Data cleaning
-│   ├── phase3.py               # Feature engineering
-│   ├── phase4.py               # KPI analysis
-│   ├── phase5.py               # Statistical testing
-│   └── phase6.py               # Visualizations
-├── outputs/                    # Charts + dashboard screenshot
-├── docs/                       # Business insights + methodology
-├── dashboards/                 # Power BI .pbix file
-├── sql/                        # SQL queries
-├── .streamlit/
-│   └── config.toml             # Dark theme config
-└── requirements.txt
 
+```text
+├── app/
+│   └── streamlit_app.py
+├── data/
+│   ├── raw/
+│   └── processed/
+├── notebooks/
+│   ├── phase1.py
+│   ├── phase2.py
+│   ├── phase3.py
+│   ├── phase4.py
+│   ├── phase5.py
+│   └── phase6.py
+├── outputs/
+├── docs/
+├── dashboards/
+├── sql/
+├── .streamlit/
+│   └── config.toml
+└── requirements.txt
+```
 ---
 
 ## 🔬 Methodology
