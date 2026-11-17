@@ -18,8 +18,8 @@ print("✅ Data Loaded for KPI Analysis\n")
 # -------------------------------
 kpi_summary = df.groupby("experiment_variant").agg(
     total_orders=("order_id", "count"),
-    total_revenue=("adjusted_amount", "sum"),
-    avg_order_value=("adjusted_amount", "mean")
+    total_revenue=("total_amount", "sum"),
+    avg_order_value=("total_amount", "mean")
 ).round(2)
 
 print("📊 Overall KPI Summary:")
@@ -45,7 +45,7 @@ kpi_summary.loc["Variant A", "uplift_%"] = round(uplift, 2)
 # -------------------------------
 # Step 3: Country-Level Analysis
 # -------------------------------
-country_analysis = df.groupby(["country", "experiment_variant"])["adjusted_amount"].mean().unstack().round(2)
+country_analysis = df.groupby(["country", "experiment_variant"])["total_amount"].mean().unstack().round(2)
 
 country_analysis["uplift_%"] = (
     (country_analysis["Variant A"] - country_analysis["Control"]) 
@@ -59,7 +59,7 @@ print(country_analysis)
 # -------------------------------
 # Step 4: Category-Level Analysis
 # -------------------------------
-category_analysis = df.groupby(["category", "experiment_variant"])["adjusted_amount"].mean().unstack().round(2)
+category_analysis = df.groupby(["category", "experiment_variant"])["total_amount"].mean().unstack().round(2)
 
 category_analysis["uplift_%"] = (
     (category_analysis["Variant A"] - category_analysis["Control"]) 

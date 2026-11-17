@@ -32,6 +32,7 @@ print(df["experiment_variant"].value_counts())
 
 # -------------------------------
 # Step 2: Simulate Pricing Impact
+# Hypothetical 12% price effect for simulation only. NOT used in reported results.
 # -------------------------------
 df["adjusted_amount"] = df["total_amount"]
 
