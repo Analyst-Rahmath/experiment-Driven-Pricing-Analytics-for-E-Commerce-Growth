@@ -1,15 +1,14 @@
 📈 Experiment-Driven Pricing Analytics for E-Commerce Growth
 
-> End-to-end GA4 A/B experimentation pipeline analyzing dynamic vs fixed pricing strategy across 1,200 orders and $1.51M GMV.
-
-
+> Simulated A/B test pipeline comparing dynamic vs fixed pricing on 1,200 e-commerce orders ($1.51M GMV), built to demonstrate experiment-analysis methodology.
+Dataset note:  The data contains no real experiment. Orders were randomly assigned to Control/Variant A in notebooks/phase3.py, so results demonstrate methodology, not a real pricing effect.”
 ---
 
 ## 🎯 Business Problem
 
 Does **dynamic pricing (Variant A)** generate higher Average Order Value than **fixed pricing (Control)**?
 
-This project builds a complete data analytics pipeline — from raw data cleaning to statistical testing to a live ML-powered Streamlit app — to answer that question with evidence.
+This project builds a complete data analytics pipeline — from raw data cleaning to statistical testing to an interactive Streamlit dashboard — to answer that question with evidence.
 
 ---
 
@@ -22,7 +21,7 @@ This project builds a complete data analytics pipeline — from raw data cleanin
 | Orders | 601 | 599 | — |
 | Uplift % | — | +3.6% | — |
 
-> **Finding:** Variant A shows consistent AOV uplift but requires extended testing for statistical significance. Targeted rollout in Electronics + UAE recommended.
+> **Finding:** Variant A’s AOV is 3.6% higher, but the difference is not statistically significant (p = 0.47). Recommendation: do not roll out; a larger test would be needed
 
 ---
 ## 🏗️ Project Structure
@@ -58,7 +57,7 @@ This project builds a complete data analytics pipeline — from raw data cleanin
 
 **Phase 6–8 :** Matplotlib/Seaborn visualizations + Power BI dashboard
 
-**Phase 9 :** Streamlit app with ML revenue predictor (Random Forest)
+**Phase 9 :** Streamlit dashboard
 
 ---
 
@@ -67,25 +66,13 @@ This project builds a complete data analytics pipeline — from raw data cleanin
 - **T-test p-value:** 0.4679
 - **Mean difference:** $44 AOV
 - **Cohen's d:** 0.042 (small effect)
-- **95% CI:** [-$71 → +$159]
-- **Conclusion:** Uplift exists but extend experiment for significance
+- **Conclusion:** No statistically significant difference; do not roll out.
 
 ---
 
-## 🌍 Segment Highlights
+## 🌍 Segment Highlights(exploratory)
 
-- **UAE:** Strongest Variant A response
-- **Electronics:** Highest AOV uplift category  
-- **India + Fashion:** Neutral/negative response — exclude from rollout
-
----
-
-## 🤖 ML Predictor
-
-Random Forest model trained on 1,200 orders:
-- **Features:** Unit price, quantity, country, category, variant
-- **Target:** Total order value
-- **Usage:** Input parameters → predicted revenue + uplift vs Control
+each country–variant group has only about 45–75 orders and nothing was corrected for multiple testing. These differences are consistent with random variation and shouldn’t drive rollout decisions.”
 
 ---
 ## 📸 Screenshots
@@ -98,9 +85,9 @@ Random Forest model trained on 1,200 orders:
 
 ---
 
-## 🚀 Live App
+## 🚀 Streamlit App
 
-👉 **[Launch Streamlit App](https://experiment-pricing-analytics.streamlit.app/)**
+👉 **[Launch Streamlit App](https://experiment-pricing-analytics.streamlit.app/) “Free-tier app may sleep; click ‘wake up’ if prompted.”**
 
 ---
 

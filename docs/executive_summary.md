@@ -14,6 +14,7 @@ than fixed pricing (Control) across global e-commerce markets?
 - **Split:** 50/50 · Control (601) vs Variant A (599)
 - **Scope:** 10 countries · 8 product categories
 - **Tests:** Independent t-test · Mann-Whitney U · Cohen's d · 95% CI
+“Experiment groups were randomly assigned (simulation).”
 
 ---
 
@@ -32,32 +33,24 @@ than fixed pricing (Control) across global e-commerce markets?
 
 ---
 
-### 🌍 Segment Analysis
-
-| Segment      | Finding                              |
-|--------------|--------------------------------------|
-| UAE          | Strongest Variant A response         |
-| Electronics  | Highest AOV uplift category          |
-| India        | Neutral/negative — exclude rollout   |
-| Fashion      | Negative response — exclude rollout  |
+### 🌍 Segment Analysis(exploratory)
+Each country–variant group has only about 45–75 orders and nothing was corrected for multiple testing. These differences are consistent with random variation and shouldn’t drive rollout decisions.”
 
 ---
 
 ### 💡 Recommendations
 
 1. **Do NOT deploy globally** — p-value insufficient for full rollout
-2. **Run targeted pilot** in UAE + Electronics for 60 additional days
+2. **Run targeted pilot** “Run a larger, properly sized test before any rollout decision.”
 3. **Increase sample size** to 3,000+ orders for statistical power
 4. **Monitor seasonality** — December drop affects both variants equally
-5. **Exclude Fashion + India** from dynamic pricing strategy
+
 
 ---
 
 ### 🚀 Next Steps
 
-- Extend experiment duration → target p < 0.05
-- Implement real-time GA4 event streaming via BigQuery
-- Build automated alerting for uplift thresholds
+- Extend experiment duration → “Calculate the required sample size before extending the test.”
 - A/B test pricing tiers within Variant A segments
 
 ---

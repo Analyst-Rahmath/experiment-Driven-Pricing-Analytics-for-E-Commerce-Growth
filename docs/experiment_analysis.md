@@ -55,7 +55,7 @@ This suggests that:
 
 ## 🌍 Segment-Level Insights
 
-Further analysis revealed:
+Further analysis revealed:each country–variant group has only about 45–75 orders and nothing was corrected for multiple testing. These differences are consistent with random variation and shouldn’t drive rollout decisions.”
 
 ### Country-Level
 
@@ -72,7 +72,6 @@ Further analysis revealed:
 ## 🚀 Business Recommendations
 
 1. Extend experiment duration to increase statistical power
-2. Focus on high-performing segments instead of global rollout
 3. Reduce variance by refining pricing strategy
 4. Conduct segmented A/B testing for more precise insights
 
@@ -80,7 +79,7 @@ Further analysis revealed:
 
 ## 🏁 Final Conclusion
 
-The experiment does not provide sufficient statistical evidence to support a full rollout of the new pricing strategy. However, targeted implementation in specific segments shows promising potential.
+The experiment does not provide sufficient statistical evidence to support a full rollout of the new pricing strategy. 
 
 ---
 

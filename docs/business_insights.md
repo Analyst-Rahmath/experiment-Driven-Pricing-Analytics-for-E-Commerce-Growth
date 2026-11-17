@@ -37,19 +37,7 @@ The new pricing strategy does not provide strong enough evidence for a full roll
 Pricing strategy does not significantly shift customer spending behavior.
 
 ---
-
-### 3. Category-Level Performance (Critical Insight)
-From the category-wise A/B comparison:
-
-#### Positive Impact Categories:
-- Electronics → Strong uplift in Variant A
-- Home Decor → Noticeable improvement
-- Beauty → Moderate increase
-
-#### Negative / Neutral Categories:
-- Grocery → Slight decline
-- Sports → Drop in performance
-- Books & Toys → Minimal or no change
+### 3.Category breakdown (exploratory)
 
 👉 **Insight:**  
 Pricing strategy impact is **not uniform across categories**
@@ -83,28 +71,16 @@ Certain product categories are more price-sensitive than others.
 ### 🚫 1. Do NOT Fully Rollout Variant A
 - Lack of statistical significance
 - No consistent performance improvement
-
 ---
 
-### ✅ 2. Apply Targeted Pricing Strategy
-Instead of full rollout:
-- Focus on high-performing categories:
-  - Electronics
-  - Home Decor
-  - Beauty
-
-👉 Run **category-specific pricing experiments**
-
----
-
-### 🔁 3. Extend the Experiment
+### 🔁 2. Extend the Experiment
 - Increase sample size
 - Run experiment for longer duration
 - Collect more stable data
 
 ---
 
-### 📊 4. Segment-Based Strategy (Next Level)
+### 📊 3. Segment-Based Strategy (Next Level)
 Future experiments should include:
 - Country-wise segmentation
 - Customer-type segmentation (new vs returning)
