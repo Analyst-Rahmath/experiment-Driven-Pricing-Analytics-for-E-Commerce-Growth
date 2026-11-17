@@ -26,7 +26,7 @@ st.markdown("""
             for E-Commerce Growth
         </p>
         <p style='color: #64748B; font-size: 0.85rem;'>
-            GA4 A/B Test · 1,200 Orders · $1.51M GMV · 10 Countries · 8 Categories
+            simulated A/B Test · 1,200 Orders · $1.51M GMV · 10 Countries · 8 Categories
         </p>
     </div>
     <hr style='border: 1px solid #1E293B; margin-bottom: 1.5rem;'>
@@ -96,11 +96,11 @@ if variant_option != "Both":
     df_filtered = df_filtered[df_filtered['experiment_variant'] == variant_option]
 
 # ── TABS ───────────────────────────────────────
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3  = st.tabs([
     "📊 Executive Dashboard",
     "🔬 Statistical Test",
     "🌍 Segment Analysis",
-    "🤖 ML Predictor"
+
 ])
 
 # ── TAB 1: EXECUTIVE DASHBOARD ─────────────────
@@ -201,22 +201,7 @@ with tab1:
 
     # Insight Box
     st.info("""
-    💡 **Key Finding:** Variant A (Dynamic Pricing) shows **+3.6% AOV uplift**
-    ($1,282 vs $1,238) across 1,200 orders and $1.51M GMV.
-
-    **Top Performing Segments:**
-    - 🏆 Electronics: **+36.86% uplift** — strongest category
-    - 🥈 Home Decor: **+18.41% uplift** — second best
-    - 🌍 Brazil: **+26.12% uplift** — strongest country
-    - 🌍 Pakistan: **+19.43% uplift** — second best country
-
-    **Avoid Rollout In:**
-    - ❌ Sports: **-16.03%** — worst category
-    - ❌ Australia: **-30.14%** — worst country
-
-    **Recommendation:** Targeted pilot in **Electronics + Brazil**
-    for 60 additional days before global deployment. p=0.47 indicates
-    extended testing required for statistical significance.
+    Key Finding: Variant A shows +3.6% AOV ($1,282 vs $1,238), but p = 0.47, so the difference is not statistically significant. This is a simulated experiment, so no real pricing effect is implied. Recommendation: do not roll out; a larger test would be needed
     """)
 
     # ── TAB 2: STATISTICAL TEST ─────────────────────
@@ -305,13 +290,10 @@ with tab2:
     #### 📋 Interpretation & Business Context
     - **$44 AOV difference exists** (Control $1,238 → Variant A $1,282) but p = 0.47 means
       this could be due to random variation
-    - **Why not significant?** High revenue variance across 10 countries and 8 categories
-      creates noise that masks the true signal
+    - **Why not significant?**  The difference is within what random variation produces.
     - **What this means for business:** Do NOT roll out Variant A globally yet
-    - **Recommendation:** Run experiment for 60 more days OR narrow to
-      Electronics + UAE where signal is strongest (+18% uplift confirmed)
-    - **This is senior thinking:** Knowing when evidence is insufficient is as
-      valuable as finding significance
+    - **Recommendation:** Run experiment for 60 more days OR “Run a larger test.” The “+18%” was Home Decor, not UAE
+   
     """)
 
 # ── TAB 3: SEGMENT ANALYSIS ─────────────────────
@@ -393,105 +375,9 @@ with tab3:
     - **Best Country:** Brazil +26.12% · Pakistan +19.43%
     - **Avoid:** Sports -16.03% · Australia -30.14%
     - **Q4 strongest quarter** — Variant A AOV $1,326 vs Control $1,252
-    - **Action:** Rollout to Electronics + Brazil first, monitor for 60 days
+    Exploratory: each country–variant group has about 45–75 orders, differences aren’t statistically tested, and they’re consistent with chance
     """)
 
-# ── TAB 4: ML PREDICTOR ─────────────────────────
-with tab4:
-    st.markdown("### 🤖 ML Revenue Predictor")
-    st.markdown("Predict expected order value based on pricing strategy, country and category.")
-
-    st.divider()
-
-    # Train model
-    @st.cache_resource
-    def train_model(df):
-        df_ml = df.copy()
-        le_country = LabelEncoder()
-        le_category = LabelEncoder()
-        le_variant = LabelEncoder()
-        df_ml['country_enc'] = le_country.fit_transform(df_ml['country'])
-        df_ml['category_enc'] = le_category.fit_transform(df_ml['category'])
-        df_ml['variant_enc'] = le_variant.fit_transform(df_ml['experiment_variant'])
-        features = ['unit_price', 'quantity', 'country_enc', 'category_enc', 'variant_enc']
-        X = df_ml[features]
-        y = df_ml['total_amount']
-        model = RandomForestRegressor(n_estimators=100, random_state=42)
-        model.fit(X, y)
-        return model, le_country, le_category, le_variant
-
-    model, le_country, le_category, le_variant = train_model(df)
-
-    # Input form
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("#### 🎛️ Input Parameters")
-        input_country = st.selectbox("Country", options=sorted(df['country'].unique()))
-        input_category = st.selectbox("Category", options=sorted(df['category'].unique()))
-        input_variant = st.selectbox("Pricing Strategy", options=['Control', 'Variant A'])
-        input_price = st.slider("Unit Price ($)", 
-                                min_value=int(df['unit_price'].min()),
-                                max_value=int(df['unit_price'].max()),
-                                value=int(df['unit_price'].mean()))
-        input_qty = st.slider("Quantity", min_value=1, max_value=10, value=2)
-
-        if st.button("🚀 Predict Revenue", use_container_width=True):
-            country_enc = le_country.transform([input_country])[0]
-            category_enc = le_category.transform([input_category])[0]
-            variant_enc = le_variant.transform([input_variant])[0]
-            prediction = model.predict([[input_price, input_qty, country_enc, category_enc, variant_enc]])[0]
-
-            control_enc = le_variant.transform(['Control'])[0]
-            baseline = model.predict([[input_price, input_qty, country_enc, category_enc, control_enc]])[0]
-            uplift_pred = ((prediction - baseline) / baseline * 100)
-
-            st.session_state['prediction'] = prediction
-            st.session_state['baseline'] = baseline
-            st.session_state['uplift_pred'] = uplift_pred
-
-    with col2:
-        st.markdown("#### 📈 Prediction Result")
-        if 'prediction' in st.session_state:
-            pred = st.session_state['prediction']
-            base = st.session_state['baseline']
-            upl = st.session_state['uplift_pred']
-
-            st.metric("Predicted Order Value", f"${pred:,.0f}")
-            st.metric("Baseline (Control)", f"${base:,.0f}")
-            st.metric("Predicted Uplift", f"{upl:+.1f}%",
-                      delta=f"{'Better' if upl > 0 else 'Worse'} than Control")
-
-            st.divider()
-
-            # Feature importance
-            st.markdown("#### 🔍 Feature Importance")
-            features = ['Unit Price', 'Quantity', 'Country', 'Category', 'Variant']
-            importance = model.feature_importances_
-            fig_imp = px.bar(
-                x=importance,
-                y=features,
-                orientation='h',
-                color=importance,
-                color_continuous_scale=['#1E293B', '#3B82F6'],
-                labels={'x': 'Importance', 'y': 'Feature'}
-            )
-            fig_imp.update_layout(
-                plot_bgcolor='#1E293B',
-                paper_bgcolor='#1E293B',
-                font_color='#FFFFFF',
-                height=300,
-                showlegend=False,
-                coloraxis_showscale=False
-            )
-            st.plotly_chart(fig_imp, use_container_width=True)
-        else:
-            st.markdown("""
-            <div style='text-align:center; padding: 3rem; color: #475569;'>
-                <h1>🎯</h1>
-                <p>Set your parameters and click<br><strong>Predict Revenue</strong></p>
-            </div>
-            """, unsafe_allow_html=True)
 
     # ── FOOTER ─────────────────────────────────────
 st.markdown("<br><br>", unsafe_allow_html=True)
